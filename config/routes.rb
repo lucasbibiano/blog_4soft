@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 Blog4soft::Application.routes.draw do
+  devise_for :users
+
   resources :posts
 
   root :to => "home#index"

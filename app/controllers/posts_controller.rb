@@ -1,7 +1,19 @@
 # -*- encoding : utf-8 -*-
 class PostsController < ApplicationController
+  before_filter :get_post, :only => [:edit, :update, :destroy, :show]
+
   # GET /posts
   # GET /posts.json
+
+  def get_post
+      @post = Post.find_by_id(params[:id])
+
+      if @post == nil
+        flash[:notice] = "Não foi possível encontrar o post"
+        redirect_to posts_url
+      end
+  end
+
   def index
     @posts = Post.all
 
@@ -14,7 +26,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,7 +47,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
   end
 
   # POST /posts
@@ -45,7 +57,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to @post, notice: 'Post criado com sucesso.' }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }
@@ -57,11 +69,11 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.json
   def update
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to @post, notice: 'Post editado com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -73,7 +85,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
     @post.destroy
 
     respond_to do |format|

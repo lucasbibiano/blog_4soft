@@ -4,7 +4,7 @@
       <h3>Alguns erros ocorreram no processo:</h3>
 
       <ul>
-      <% @post.errors.full_messages.each do |msg| %>
+      <% @post.errors.each do |field, msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
