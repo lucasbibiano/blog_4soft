@@ -12,10 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name, "Nome:" %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
     <%= f.label :title, "Título" %><br />
     <%= f.text_field :title %>
   </div>
@@ -24,6 +20,6 @@
     <%= f.text_area :content %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Criar post" %>
   </div>
 <% end %>

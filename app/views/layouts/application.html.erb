@@ -10,6 +10,19 @@
 
 	<div id="topo">
 		<h1>Blog 4soft</h1>
+
+		<div id="nav">
+		<% if user_signed_in? %>
+        	<p> 
+        		Logado como <%= current_user.name %>
+        		<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+        	</p>
+      	<% else %>
+      		<%= link_to "Registrar-se", new_user_registration_path %>
+        	<%= link_to "Entrar", new_user_session_path %>
+      	<% end %>
+		</div>
+
 	</div>
 
 	<div id="avisos">
@@ -25,6 +38,10 @@
 	<div id="rodape">
 		<p>Desenvolvido por Lucas Bibiano dos Santos</p>
 	</div>
+
+	<%= session.inspect %>
+	<hr/>
+	<%= current_user.inspect %>
 
 </body>
 </html>

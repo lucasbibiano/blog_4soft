@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class PostsController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :get_post, :only => [:edit, :update, :destroy, :show]
 
   # GET /posts
@@ -36,7 +37,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   # GET /posts/new.json
-  def new
+  def new 
     @post = Post.new
 
     respond_to do |format|
@@ -53,8 +54,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
-
+    @user = current_user
+    @post = @user.posts.create(params[:post])
+    
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post criado com sucesso.' }
@@ -71,6 +73,11 @@ class PostsController < ApplicationController
   def update
     #@post = Post.find(params[:id])
 
+    if @post.user != current_user
+      flash[:notice] = "Você não tem permissão para editar este post"
+      redirect_to posts_url
+    end
+
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post editado com sucesso.' }
@@ -86,6 +93,12 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     #@post = Post.find(params[:id])
+
+    if @post.user != current_user
+      flash[:notice] = "Você não tem permissão para apagar este post"
+      redirect_to posts_url
+    end
+
     @post.destroy
 
     respond_to do |format|

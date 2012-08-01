@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 Blog4soft::Application.routes.draw do
-  devise_for :users
-
-  resources :posts
+  devise_for :users do
+    resources :posts
+  end
 
   root :to => "home#index"
 
