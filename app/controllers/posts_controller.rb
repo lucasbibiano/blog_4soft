@@ -48,6 +48,11 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    if @post.user != current_user
+      flash[:notice] = "Você não tem permissão para editar este post"
+      redirect_to posts_url
+      return
+    end
     #@post = Post.find(params[:id])
   end
 
@@ -73,11 +78,6 @@ class PostsController < ApplicationController
   def update
     #@post = Post.find(params[:id])
 
-    if @post.user != current_user
-      flash[:notice] = "Você não tem permissão para editar este post"
-      redirect_to posts_url
-    end
-
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post editado com sucesso.' }
@@ -97,6 +97,7 @@ class PostsController < ApplicationController
     if @post.user != current_user
       flash[:notice] = "Você não tem permissão para apagar este post"
       redirect_to posts_url
+      return
     end
 
     @post.destroy
