@@ -1,5 +1,8 @@
 <h2>Listagem de posts</h2>
 
+<% if @posts.empty? %>
+  <p>Não há nenhum post ainda.</p>
+<% else %>
 <table>
   <tr>
     <th>Autor</th>
@@ -9,16 +12,17 @@
     <th></th>
     <th></th>
   </tr>
-
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= post.user.name %></td>
-    <td><%= post.title %></td>
-    <td><%= post.content %></td>
-    <td><%= link_to 'Exibir detalhes', post %></td>
-    <td><%= link_to 'Editar', edit_post_path(post) %></td>
-    <td><%= link_to 'Apagar', post, confirm: 'Está certo disso?', method: :delete %></td>
-  </tr>
+  
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.user.name %></td>
+      <td><%= post.title %></td>
+      <td><%= post.content %></td>
+      <td><%= link_to 'Exibir detalhes', post %></td>
+      <td><%= link_to 'Editar', edit_post_path(post) %></td>
+      <td><%= link_to 'Apagar', post, confirm: 'Está certo disso?', method: :delete %></td>
+    </tr>
+  <% end %>
 <% end %>
 </table>
 

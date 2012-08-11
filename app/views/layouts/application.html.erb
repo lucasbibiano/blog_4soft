@@ -8,36 +8,69 @@
 </head>
 <body>
 
-	<div id="topo">
-		<h1>Blog 4soft</h1>
+	<header>
 
-		<div id="nav">
-		<% if user_signed_in? %>
-        	<p> 
-        		Logado como <%= current_user.name %>
-        		<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
-        	</p>
-      	<% else %>
-      		<%= link_to "Registrar-se", new_user_registration_path %>
-        	<%= link_to "Entrar", new_user_session_path %>
-      	<% end %>
+		<div class="container">
+
+			<div class="row">
+
+				<div class="span9">
+					<h1>Blog 4soft</h1>
+				</div>
+
+				<div class="span3">
+				<% if user_signed_in? %>
+		        	<p> 
+		        		Logado como <%= current_user.name %>
+		        		<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+		        	</p>
+		      	<% else %>
+		      		<%= link_to "Registrar-se", new_user_registration_path %>
+		        	<%= link_to "Entrar", new_user_session_path %>
+		      	<% end %>
+				</div>
+
+			</div>
+		</div>
+
+	</header>
+
+
+	<div class="container">
+
+		<div class="row">
+
+			<section class="span12 avisos">
+				<% if flash[:notice] %>
+					<p class="notice"><%= flash[:notice] %></p>
+				<% end %>
+			</section>
+
+		</div>
+
+		<div class="row">
+			<section class="span12 conteudo">
+				<%= yield %>
+			</section>
 		</div>
 
 	</div>
 
-	<div id="avisos">
-		<% if flash[:notice] %>
-			<p class="notice"><%= flash[:notice] %></p>
-		<% end %>
-	</div>
+	<footer>
 
-	<div id="conteudo">
-		<%= yield %>
-	</div>
+			<div class="container">
 
-	<div id="rodape">
-		<p>Desenvolvido por Lucas Bibiano dos Santos</p>
-	</div>
+				<div class="row">
+
+					<div class="span12">
+						<p>Desenvolvido por Lucas Bibiano dos Santos</p>
+					</div>
+
+				</div>
+
+			</div>
+
+	</footer>
 
 </body>
 </html>
