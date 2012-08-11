@@ -15,18 +15,20 @@
 			<div class="row">
 
 				<div class="span9">
-					<h1>Blog 4soft</h1>
+					<h1>Blog do barulho</h1>
 				</div>
 
 				<div class="span3">
 				<% if user_signed_in? %>
-		        	<p> 
-		        		Logado como <%= current_user.name %>
-		        		<%= link_to "Sair", destroy_user_session_path, :method => :delete %>
-		        	</p>
+					<ul>
+						<li>Logado como "<%= current_user.name %>"</li>
+						<li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
+		        	</ul> 	
 		      	<% else %>
-		      		<%= link_to "Registrar-se", new_user_registration_path %>
-		        	<%= link_to "Entrar", new_user_session_path %>
+		      		<ul>
+		      			<li><%= link_to "Registrar-se", new_user_registration_path %></li>
+		      			<li><%= link_to "Entrar", new_user_session_path %></li>
+		        	</ul>
 		      	<% end %>
 				</div>
 
@@ -49,27 +51,27 @@
 		</div>
 
 		<div class="row">
+
 			<section class="span12 conteudo">
 				<%= yield %>
 			</section>
+
 		</div>
 
 	</div>
 
 	<footer>
+		<div class="container">
 
-			<div class="container">
+			<div class="row">
 
-				<div class="row">
-
-					<div class="span12">
-						<p>Desenvolvido por Lucas Bibiano dos Santos</p>
-					</div>
-
+				<div class="span12">
+					<p>Desenvolvido por Lucas Bibiano dos Santos</p>
 				</div>
 
-			</div>
+			</div>	
 
+		</div>
 	</footer>
 
 </body>
