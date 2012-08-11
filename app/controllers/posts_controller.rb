@@ -97,7 +97,7 @@ class PostsController < ApplicationController
     if @post.user != current_user
       flash[:notice] = "Você não tem permissão para apagar este post"
       redirect_to posts_url
-      return
+      #return
     end
 
     @post.destroy

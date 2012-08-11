@@ -6,5 +6,5 @@ class Post < ActiveRecord::Base
                     :length => { :minimum => 5,
                       :message => "Tamanho mínimo do título é de 5 caracteres" }
 
-  belongs_to :user, :dependent => :destroy
+  belongs_to :user
 end
